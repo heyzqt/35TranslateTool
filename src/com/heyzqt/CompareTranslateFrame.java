@@ -1,12 +1,13 @@
 package com.heyzqt;
 
 import com.widget.DefaultFont;
+import com.widget.FileChooser;
 import com.widget.ToolFont;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 /**
  * Created by heyzqt 9/27/2017
@@ -26,11 +27,19 @@ public class CompareTranslateFrame implements ActionListener {
     /**
      * log panel
      */
+    private JScrollPane mLogPanel;
     private static JTextArea mLogArea;
     private JButton mClearBtn;
 
-    private static final String STANDARD_FILE_PATH = "E:\\origin_keys";
-    private static String COMPARE_FILE_PATH = "";
+    private JButton mStartCompareBtn;
+
+    /**
+     * choose file
+     */
+    private FileChooser mFileChooser;
+
+    public static final String STANDARD_FILE_PATH = "E:\\origin_keys";
+    public static String COMPARE_FILE_PATH = "";
 
     public CompareTranslateFrame() {
         initFrame();
@@ -57,13 +66,18 @@ public class CompareTranslateFrame implements ActionListener {
         // log panel
         mLogArea = new JTextArea();
         mLogArea.setFont(new DefaultFont());
-        mLogArea.append("this is a log area");
-        mLogArea.setBounds(150, 100, 1000, 450);
+        mLogArea.append("this is a log area\n");
+        mLogPanel = new JScrollPane(mLogArea);
+        mLogPanel.setBounds(150, 100, 1000, 450);
         mClearBtn = new JButton("clear log");
         mClearBtn.setFont(new DefaultFont());
         mClearBtn.setBounds(1030, 560, 120, 40);
         mClearBtn.addActionListener(this);
 
+        mStartCompareBtn = new JButton("start compare");
+        mStartCompareBtn.setFont(new DefaultFont());
+        mStartCompareBtn.setBounds(860, 560, 150, 40);
+        mStartCompareBtn.addActionListener(this);
 
         mFrame.setSize(1280, 660);
         mFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -72,8 +86,9 @@ public class CompareTranslateFrame implements ActionListener {
         mMainPanel.add(mChooseDirectoryBtn);
         mMainPanel.add(originFilePath);
         mMainPanel.add(mFilePathLab);
+        mMainPanel.add(mStartCompareBtn);
         mMainPanel.add(mClearBtn);
-        mMainPanel.add(mLogArea);
+        mMainPanel.add(mLogPanel);
         mFrame.add(mMainPanel);
     }
 
@@ -81,9 +96,37 @@ public class CompareTranslateFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         String btn = e.getActionCommand();
         if ("选择要对比的res文件夹".equals(btn)) {
-            System.out.println("click");
+            mFileChooser = new FileChooser();
+            if (!mFileChooser.getFilepath().equals("")) {
+                mFilePathLab.setText("对比的文件夹路径：" + mFileChooser.getFilepath());
+            }
         } else if ("clear log".equals(btn)) {
-            System.out.println("clear log");
+            mLogArea.setText("");
+        } else if ("start compare".equals(btn)) {
+            //check if standard file path is empty
+            File standardFile = new File(STANDARD_FILE_PATH);
+            if (standardFile == null || !standardFile.exists() || standardFile.listFiles().length == 0) {
+                showLog("Error!!! Standard file doesn't exist or is empty.");
+                return;
+            }
+
+            //check if the compare file path is empty
+            if (mFileChooser == null) {
+                showLog("Error!!! Please choose a compare file path.");
+                return;
+            }
+            COMPARE_FILE_PATH = mFileChooser.getFilepath();
+            if (COMPARE_FILE_PATH.equals("")) {
+                showLog("Error!!! Please choose a compare file path.");
+                return;
+            }
+            File compareFile = new File(COMPARE_FILE_PATH);
+            if (compareFile == null || !compareFile.exists() || !compareFile.isDirectory()) {
+                showLog("Error!!! Please choose a compare res file directory.");
+                return;
+            }
+
+            //Main.startCompare(STANDARD_FILE_PATH, COMPARE_FILE_PATH);
         }
     }
 
