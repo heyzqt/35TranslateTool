@@ -61,64 +61,66 @@ public class Main {
 
     public static void main(String[] args) {
 
+        new CompareTranslateFrame();
+
         //compareXMLA2XMLBArray("src/test1.xml", "src/test2.xml", "src/test2.xml");
 
         startTime = System.currentTimeMillis();
 
-        //找到标准的35国xml文件
-        File file = new File(FILE_STANDARD_PATH);
-        File[] standardFiles = file.listFiles();
-        for (int i = 0; i < standardFiles.length; i++) {
-            if (standardFiles[i].isFile()) {
-                FILE_STANDARD_NAME = standardFiles[i].getName();
-                //System.out.println("i = " + i + " standard file name = " + FILE_STANDARD_NAME);
-            }
-        }
-
-
-        //找到要修改的35国xml文件
-        File writeFile = new File(WRITE_FILE_PATH);      //该文件夹下不止35国，需要进行筛选
-        File[] writeFiles = writeFile.listFiles();      // res下所有文件
-        int flag = 0;       //标志位，节约扫描时间
-        for (int i = 0; i < countryStr.length; i++) {
-            String standardXML = standardFiles[i].getName();
-
-            boolean isFindDirectory = false;
-            for (int j = 0; j < writeFiles.length; j++) {
-                if (isFindDirectory) {
-                    break;
-                }
-
-                //find directory
-                if (countryStr[i].equals(writeFiles[j].getName())) {
-                    //flag = j;
-
-                    isFindDirectory = true;
-                    File findFile = new File(WRITE_FILE_PATH + "\\" + countryStr[i]);
-                    File[] findFiles = findFile.listFiles();
-                    //System.out.println("country name = " + countryStr[i]);
-
-                    //find xml file
-                    for (int k = 0; k < findFiles.length; k++) {
-                        String temp = findFiles[k].getName();
-
-                        WRITE_File_NAME = findXMLFile(FILENAME, temp);
-
-                        if (!WRITE_File_NAME.equals("")) {
-                            System.out.println("i = " + i + ",WRITE_File_NAME = " + WRITE_File_NAME);
-                            // main step
-                            compareXMLA2XMLB(FILE_STANDARD_PATH + "/" + standardXML,
-                                    WRITE_FILE_PATH + "\\" + countryStr[i] + "\\" + WRITE_File_NAME,
-                                    WRITE_FILE_PATH + "\\" + countryStr[i] + "\\" + WRITE_File_NAME);
-//                            compareXMLA2XMLBArray(FILE_STANDARD_PATH + "/" + standardXML,
+//        //找到标准的35国xml文件
+//        File file = new File(FILE_STANDARD_PATH);
+//        File[] standardFiles = file.listFiles();
+//        for (int i = 0; i < standardFiles.length; i++) {
+//            if (standardFiles[i].isFile()) {
+//                FILE_STANDARD_NAME = standardFiles[i].getName();
+//                //System.out.println("i = " + i + " standard file name = " + FILE_STANDARD_NAME);
+//            }
+//        }
+//
+//
+//        //找到要修改的35国xml文件
+//        File writeFile = new File(WRITE_FILE_PATH);      //该文件夹下不止35国，需要进行筛选
+//        File[] writeFiles = writeFile.listFiles();      // res下所有文件
+//        int flag = 0;       //标志位，节约扫描时间
+//        for (int i = 0; i < countryStr.length; i++) {
+//            String standardXML = standardFiles[i].getName();
+//
+//            boolean isFindDirectory = false;
+//            for (int j = 0; j < writeFiles.length; j++) {
+//                if (isFindDirectory) {
+//                    break;
+//                }
+//
+//                //find directory
+//                if (countryStr[i].equals(writeFiles[j].getName())) {
+//                    //flag = j;
+//
+//                    isFindDirectory = true;
+//                    File findFile = new File(WRITE_FILE_PATH + "\\" + countryStr[i]);
+//                    File[] findFiles = findFile.listFiles();
+//                    //System.out.println("country name = " + countryStr[i]);
+//
+//                    //find xml file
+//                    for (int k = 0; k < findFiles.length; k++) {
+//                        String temp = findFiles[k].getName();
+//
+//                        WRITE_File_NAME = findXMLFile(FILENAME, temp);
+//
+//                        if (!WRITE_File_NAME.equals("")) {
+//                            System.out.println("i = " + i + ",WRITE_File_NAME = " + WRITE_File_NAME);
+//                            // main step
+//                            compareXMLA2XMLB(FILE_STANDARD_PATH + "/" + standardXML,
 //                                    WRITE_FILE_PATH + "\\" + countryStr[i] + "\\" + WRITE_File_NAME,
-//                                    WRITE_FILE_PATH + "\\" + countryStr[i] + "\\" + WRITE_File_NAME, 5);
-                            break;
-                        }
-                    }
-                }
-            }
-        }
+//                                    WRITE_FILE_PATH + "\\" + countryStr[i] + "\\" + WRITE_File_NAME);
+////                            compareXMLA2XMLBArray(FILE_STANDARD_PATH + "/" + standardXML,
+////                                    WRITE_FILE_PATH + "\\" + countryStr[i] + "\\" + WRITE_File_NAME,
+////                                    WRITE_FILE_PATH + "\\" + countryStr[i] + "\\" + WRITE_File_NAME, 5);
+//                            break;
+//                        }
+//                    }
+//                }
+//            }
+//        }
 
         endTime = System.currentTimeMillis();
         //print the program run time
