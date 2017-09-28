@@ -1,13 +1,11 @@
 package com.heyzqt;
 
 import org.dom4j.*;
-import org.dom4j.io.OutputFormat;
 import org.dom4j.io.SAXReader;
 import org.dom4j.io.XMLWriter;
 
 import java.io.*;
 import java.util.Iterator;
-import java.util.concurrent.ForkJoinPool;
 
 public class Main {
 
@@ -32,7 +30,8 @@ public class Main {
      * 当前需要检查的文件名,只要文件名，不要后缀
      * 注意！！！ 文件名一定要规范！！！
      */
-    private final static String FILENAME = "mmp_strings.xml";
+//    private final static String FILENAME = "mmp_strings.xml";
+    private final static String FILENAME = "nav_strings";
 
     /**
      * 统计一共修改了多少个文件
@@ -50,6 +49,10 @@ public class Main {
     public static void main(String[] args) {
 
         new CompareTranslateFrame();
+
+//        String name = findXMLFile("menu_strings.xml", "thr_menu_strings.xml");
+//        System.out.println("name = " + name);
+        //startCompare("E:\\origin_keys", WRITE_FILE_PATH);
 
         //compareXMLA2XMLBArray("src/test1.xml", "src/test2.xml", "src/test2.xml");
 
@@ -110,72 +113,106 @@ public class Main {
     public static void startCompare(String standardfilepath, String comparefilepath) {
         long startTime = System.currentTimeMillis();
 
-        //找到标准的35国xml文件
+        //找到标准的xml文件
         File file = new File(standardfilepath);
-        if (!file.exists() || !file.isDirectory()) {
-            System.out.println("Error!!! the file path selected is wrong.");
-        }
         File[] standardFiles = file.listFiles();
+        int standardLength = standardFiles.length;
         //print standard files name
-        for (int i = 0; i < standardFiles.length; i++) {
+        for (int i = 0; i < standardLength; i++) {
             if (standardFiles[i].isFile()) {
                 String temp = standardFiles[i].getName();
-                System.out.println("i = " + i + " standard file name = " + temp);
+                //CompareTranslateFrame.showLog("i = " + i + " standard file name = " + temp);
+                //System.out.println("i = " + i + " standard file name = " + temp);
             }
+        }
+
+        //find file type and countries name
+        String filetype;
+        String[] countryDirectories = new String[standardLength];
+        String firstFileName = standardFiles[0].getName();
+        //find file type
+        firstFileName = firstFileName.replace(".xml", "");
+        int startIndex = firstFileName.indexOf("strings");
+        int endIndex = startIndex + "strings".length();
+        filetype = firstFileName.substring(0, endIndex);
+        System.out.println("filetype = " + filetype);
+        CompareTranslateFrame.showLog("filetype = " + filetype);
+
+        //find countries name
+        for (int i = 0; i < standardLength; i++) {
+            String temp = standardFiles[i].getName();
+            temp = temp.replace(".xml", "");
+            temp = temp.replace(filetype + "_", "values-");
+            temp = temp.replace("_", "-");
+            countryDirectories[i] = temp;
+            System.out.println("num = " + (i + 1) + " country = " + countryDirectories[i]);
+            CompareTranslateFrame.showLog("num = " + (i + 1) + " country = " + countryDirectories[i]);
+        }
+        System.out.println();
+        CompareTranslateFrame.showLog("");
+
+        if (countryDirectories.length == 0) {
+            System.out.println("error!!!Compare country directories is null.");
+            CompareTranslateFrame.showLog("error!!!Compare country directories is null.");
+            return;
         }
 
         //找到要修改的xml文件
         File writeFile = new File(comparefilepath);      //该文件夹下不止35国，需要进行筛选
         File[] writeFiles = writeFile.listFiles();      // res下所有文件
-        int flag = 0;       //标志位，节约扫描时间
-        for (int i = 0; i < countryStr.length; i++) {
+        for (int i = 0; i < countryDirectories.length; i++) {
             String standardXML = standardFiles[i].getName();
 
-            boolean isFindDirectory = false;
             for (int j = 0; j < writeFiles.length; j++) {
-                if (isFindDirectory) {
-                    break;
-                }
-
                 //find directory
-                if (countryStr[i].equals(writeFiles[j].getName())) {
-                    //flag = j;
-
-                    isFindDirectory = true;
-                    File findFile = new File(WRITE_FILE_PATH + "\\" + countryStr[i]);
+                if (countryDirectories[i].equals(writeFiles[j].getName())) {
+                    File findFile = new File(comparefilepath + "\\" + countryDirectories[i]);
                     File[] findFiles = findFile.listFiles();
-                    //System.out.println("country name = " + countryStr[i]);
+                    //System.out.println("country name = " + countryDirectories[i]);
+
+                    if (findFiles == null || findFiles.length == 0) {
+                        System.out.println("Error!!!Compare file is empty.");
+                        CompareTranslateFrame.showLog("Error!!!Compare file is empty.");
+                        return;
+                    }
 
                     //find xml file
                     for (int k = 0; k < findFiles.length; k++) {
                         String temp = findFiles[k].getName();
+                        if (temp.indexOf("arrays") != -1) {
+                            continue;
+                        }
 
-                        WRITE_File_NAME = findXMLFile(FILENAME, temp);
-
-                        if (!WRITE_File_NAME.equals("")) {
-                            System.out.println("i = " + i + ",WRITE_File_NAME = " + WRITE_File_NAME);
+                        String compareFileName = findXMLFile(filetype, temp);
+                        if (!compareFileName.equals("")) {
+                            //System.out.println("i = " + (i + 1) + ",compare file name = " + compareFileName);
                             // main step
-                            compareXMLA2XMLB(FILE_STANDARD_PATH + "/" + standardXML,
-                                    WRITE_FILE_PATH + "\\" + countryStr[i] + "\\" + WRITE_File_NAME,
-                                    WRITE_FILE_PATH + "\\" + countryStr[i] + "\\" + WRITE_File_NAME);
-//                            compareXMLA2XMLBArray(FILE_STANDARD_PATH + "/" + standardXML,
-//                                    WRITE_FILE_PATH + "\\" + countryStr[i] + "\\" + WRITE_File_NAME,
-//                                    WRITE_FILE_PATH + "\\" + countryStr[i] + "\\" + WRITE_File_NAME, 5);
+                            // compare XMLA with XMLB
+                            compareXMLA2XMLB(standardfilepath + "/" + standardXML,
+                                    comparefilepath + "\\" + countryDirectories[i] + "\\" + compareFileName,
+                                    comparefilepath + "\\" + countryDirectories[i] + "\\" + compareFileName);
                             break;
                         }
                     }
+                    //find directory and break
+                    break;
                 }
             }
         }
 
         //print the program run time
         System.out.println("程序运行时间：" + (System.currentTimeMillis() - startTime) + "ms");
+        CompareTranslateFrame.showLog("程序运行时间：" + (System.currentTimeMillis() - startTime) + "ms");
     }
 
     private static String findXMLFile(String findFile, String temp) {
         String result = "";
         if (findFile.equals("menu_strings.xml")) {
             if (temp.indexOf("menu_strings.xml") != -1 && temp.indexOf("thr_menu_strings.xml") == -1) {
+                //menu_strings.xml
+                result = temp;
+            } else if (temp.indexOf("menu_strings.xml") != -1 && temp.indexOf("thr_menu_strings.xml") != -1) {
+                //thr_menu_strings.xml
                 result = temp;
             }
         } else {
@@ -192,6 +229,9 @@ public class Main {
         System.out.println("num " + num);
         System.out.println("readfile path = " + standardFilePath);
         System.out.println("writefile path = " + writeFilePath);
+        CompareTranslateFrame.showLog("num " + num);
+        CompareTranslateFrame.showLog("readfile path = " + standardFilePath);
+        CompareTranslateFrame.showLog("writefile path = " + writeFilePath);
         // 创建saxReader对象
         SAXReader reader = new SAXReader();
         // 通过read方法读取一个文件 转换成Document对象
@@ -249,6 +289,7 @@ public class Main {
                         CHANGED_NUM++;
                         //System.out.println("changed " + CHANGED_NUM + " tempEle2 = " + tempEle2.getText());
                         System.out.println("changed " + CHANGED_NUM + " key = " + key1);
+                        CompareTranslateFrame.showLog("changed " + CHANGED_NUM + " key = " + key1);
                         isChanged = true;
                         break;
                     }
@@ -263,15 +304,17 @@ public class Main {
                 ADD_NUM++;
                 isChanged = true;
                 System.out.println("Add " + ADD_NUM + " key = " + key1);
+                CompareTranslateFrame.showLog("Add " + ADD_NUM + " key = " + key1);
             }
 
             if (!isChanged) {
                 UNCHANGED_NUM++;
                 System.out.println("unchanged key = " + key1);
+                CompareTranslateFrame.showLog("unchanged key = " + key1);
             }
         }
 
-        // 写入到一个新的文件中
+        // write to a new file
         try {
             writer(document2, writeFilePath);
         } catch (Exception e) {
@@ -282,7 +325,12 @@ public class Main {
         System.out.println("changed count = " + CHANGED_NUM + ", add count = " + ADD_NUM + ", unchanged count = " +
                 UNCHANGED_NUM + ",result = " +
                 (CHANGED_NUM + UNCHANGED_NUM + ADD_NUM));
-        System.out.println("wirte end\n");
+        System.out.println("write end\n");
+        CompareTranslateFrame.showLog("changed count = " + CHANGED_NUM + ", add count = " + ADD_NUM + ", unchanged " +
+                "count = " +
+                UNCHANGED_NUM + ",result = " +
+                (CHANGED_NUM + UNCHANGED_NUM + ADD_NUM));
+        CompareTranslateFrame.showLog("write end\n");
     }
 
 

@@ -60,7 +60,7 @@ public class CompareTranslateFrame implements ActionListener {
         originFilePath.setBounds(400, 30, 500, 20);
         mFilePathLab = new JLabel();
         mFilePathLab.setFont(new DefaultFont());
-        mFilePathLab.setText("对比的文件夹路径：");
+        mFilePathLab.setText("对比的文件夹路径(建议放在E:\\res)：");
         mFilePathLab.setBounds(400, 20, 1000, 100);
 
         // log panel
@@ -126,7 +126,7 @@ public class CompareTranslateFrame implements ActionListener {
                 return;
             }
 
-            //Main.startCompare(STANDARD_FILE_PATH, COMPARE_FILE_PATH);
+            Main.startCompare(STANDARD_FILE_PATH, COMPARE_FILE_PATH);
         }
     }
 
