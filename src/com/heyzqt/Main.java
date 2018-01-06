@@ -50,7 +50,7 @@ public class Main {
 
         new CompareTranslateFrame();
 
-        compareXMLA2XMLB("src/vi_rVN.xml", "src/strings.xml", "src/strings.xml");
+        compareXMLA2XMLB("src/standard_strings_vi_rVN.xml", "src/strings.xml", "src/strings.xml");
 
 //        String name = findXMLFile("menu_strings.xml", "thr_menu_strings.xml");
 //        System.out.println("name = " + name);
@@ -286,7 +286,7 @@ public class Main {
                     String value1 = tempEle1.getText();
                     //System.out.println("value1 = " + value1 + ",value2 = " + tempEle2.getText());
                     // compare the value
-                    if(value1.equals("xx")){
+                    if (value1.equals("xx")) {
                         continue;
                     }
                     if (!value1.equals(tempEle2.getText())) {
@@ -303,13 +303,15 @@ public class Main {
 
             // if the key doesn't existed, we should add it
             if (!isExisted) {
-                Element newElement = root2.addElement("string");
-                newElement.addAttribute("name", key1);
-                newElement.setText(tempEle1.getText());
-                ADD_NUM++;
-                isChanged = true;
-                System.out.println("Add " + ADD_NUM + " key = " + key1);
-                CompareTranslateFrame.showLog("Add " + ADD_NUM + " key = " + key1);
+                if (!"xx".equals(tempEle1.getText())) {
+                    Element newElement = root2.addElement("string");
+                    newElement.addAttribute("name", key1);
+                    newElement.setText(tempEle1.getText());
+                    ADD_NUM++;
+                    isChanged = true;
+                    System.out.println("Add " + ADD_NUM + " key = " + key1);
+                    CompareTranslateFrame.showLog("Add " + ADD_NUM + " key = " + key1);
+                }
             }
 
             if (!isChanged) {
