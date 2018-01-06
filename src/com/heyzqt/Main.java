@@ -50,6 +50,8 @@ public class Main {
 
         new CompareTranslateFrame();
 
+        compareXMLA2XMLB("src/vi_rVN.xml", "src/strings.xml", "src/strings.xml");
+
 //        String name = findXMLFile("menu_strings.xml", "thr_menu_strings.xml");
 //        System.out.println("name = " + name);
         //startCompare("E:\\origin_keys", WRITE_FILE_PATH);
@@ -284,6 +286,9 @@ public class Main {
                     String value1 = tempEle1.getText();
                     //System.out.println("value1 = " + value1 + ",value2 = " + tempEle2.getText());
                     // compare the value
+                    if(value1.equals("xx")){
+                        continue;
+                    }
                     if (!value1.equals(tempEle2.getText())) {
                         tempEle2.setText(value1.toString());
                         CHANGED_NUM++;
