@@ -155,6 +155,7 @@ public class TransArray
         ArrayList<String> itemList= map.get(array_name);
         if (itemList==null){
             itemList=new ArrayList<String>();
+
         }
         itemList.add(item_value);
         map.put(array_name,itemList);
