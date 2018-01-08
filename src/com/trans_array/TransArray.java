@@ -59,7 +59,6 @@ public class TransArray
     {
         Set<String> s_keySet=s_XmlMap.keySet();
         for (String key:s_keySet){
-            System.out.println("key is "+key);
             ArrayList<String> itemList=s_XmlMap.get(key);
             for (int i=0;i<itemList.size();i++)
             {
@@ -74,7 +73,6 @@ public class TransArray
                     }
                 }
             }
-            System.out.println("Total change number is ["+count+"]");
             s_XmlMap.put(key,itemList);
         }
     }
@@ -145,13 +143,7 @@ public class TransArray
             String eng_name=curRow.getCell(ENG_COL_NUM).getStringCellValue();
             String trans_value_type=curRow.getCell(ITEM_COL_NUM).getCellFormula();
             String trans_value="";
-            if (trans_value_type.equals("NUMERIC")){
-                double a=curRow.getCell(ITEM_COL_NUM).getNumericCellValue();
-                trans_value=Double.toString(a);
-            }else if(trans_value_type.equals("STRING")){
-                trans_value=curRow.getCell(ITEM_COL_NUM).getStringCellValue();
-            }
-            System.out.println(eng_name+"  "+trans_value);
+            trans_value=curRow.getCell(ITEM_COL_NUM).getStringCellValue();
             t_XmlMap.put(eng_name,trans_value);
         }
         System.out.println("xmlmap size is "+ t_XmlMap.size());

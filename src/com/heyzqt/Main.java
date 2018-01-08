@@ -1,6 +1,7 @@
 package com.heyzqt;
 
 import com.trans_array.TransArray;
+import org.apache.poi.ss.formula.functions.T;
 import org.dom4j.*;
 import org.dom4j.io.SAXReader;
 import org.dom4j.io.XMLWriter;
@@ -8,6 +9,7 @@ import org.dom4j.io.XMLWriter;
 import java.io.*;
 import java.util.Iterator;
 
+import static java.awt.SystemColor.menu;
 import static org.apache.poi.xwpf.usermodel.XWPFRun.FontCharRange.cs;
 
 public class Main {
@@ -51,34 +53,35 @@ public class Main {
     private static void stringOrArray(int stringOrArray){
         if (stringOrArray==0){
             new CompareTranslateFrame();
-            compareXMLA2XMLB("res/norway/LiveTVSetupWizard/values-temp/menu_strings.xml","res/norway/LiveTVSetupWizard/values-nb/NOR_menu_strings.xml","res/norway/LiveTVSetupWizard/values-nb/NOR_menu_strings.xml");
-            //compareXMLA2XMLB("res/norway/LiveTVSetupWizard/values-temp/nav_strings.xml","res/norway/LiveTVSetupWizard/values-nb/NOR_nav_strings.xml","res/norway/LiveTVSetupWizard/values-nb/NOR_nav_strings.xml");
-            //compareXMLA2XMLB("res/norway/LiveTVSetupWizard/values-temp/thr_strings.xml","res/norway/LiveTVSetupWizard/values-nb/NOR_thr_menu_strings.xml","res/norway/LiveTVSetupWizard/values-nb/NOR_thr_menu_strings.xml");
-            //compareXMLA2XMLB("res/norway/LiveTVSetupWizard/values-temp/timeshift_strings.xml","res/norway/LiveTVSetupWizard/values-nb/NOR_timeshift_strings.xml","res/norway/LiveTVSetupWizard/values-nb/NOR_timeshift_strings.xml");
-            //compareXMLA2XMLB("res/norway/LiveTVSetupWizard/values-temp/mmp_strings.xml","res/norway/LiveTVSetupWizard/values-nb/NOR_mmp_strings.xml","res/norway/LiveTVSetupWizard/values-nb/NOR_mmp_strings.xml");
-            //compareXMLA2XMLB("res/norway/LiveTVSetupWizard/values-temp/play_strings.xml","res/norway/LiveTVSetupWizard/values-nb/NOR_play_strings.xml","res/norway/LiveTVSetupWizard/values-nb/NOR_play_strings.xml");
-            compareXMLA2XMLB("res/norway/LiveTVSetupWizard/values-temp/strings.xml","res/norway/LiveTVSetupWizard/values-nb/NOR_strings.xml","res/norway/LiveTVSetupWizard/values-nb/NOR_strings.xml");
+            compareXMLA2XMLB("res/norway/MultiMediaPlayer/values-temp/menu_strings.xml","res/norway/MultiMediaPlayer/values-nb/NOR_menu_strings.xml","res/norway/MultiMediaPlayer/values-nb/NOR_menu_strings.xml");
+            compareXMLA2XMLB("res/norway/MultiMediaPlayer/values-temp/nav_strings.xml","res/norway/MultiMediaPlayer/values-nb/NOR_nav_strings.xml","res/norway/MultiMediaPlayer/values-nb/NOR_nav_strings.xml");
+            compareXMLA2XMLB("res/norway/MultiMediaPlayer/values-temp/thr_strings.xml","res/norway/MultiMediaPlayer/values-nb/NOR_thr_menu_strings.xml","res/norway/MultiMediaPlayer/values-nb/NOR_thr_menu_strings.xml");
+            compareXMLA2XMLB("res/norway/MultiMediaPlayer/values-temp/timeshift_strings.xml","res/norway/MultiMediaPlayer/values-nb/NOR_timeshift_strings.xml","res/norway/MultiMediaPlayer/values-nb/NOR_timeshift_strings.xml");
+            compareXMLA2XMLB("res/norway/MultiMediaPlayer/values-temp/mmp_strings.xml","res/norway/MultiMediaPlayer/values-nb/NOR_mmp_strings.xml","res/norway/MultiMediaPlayer/values-nb/NOR_mmp_strings.xml");
+            //compareXMLA2XMLB("res/norway/MultiMediaPlayer/values-temp/play_strings.xml","res/norway/MultiMediaPlayer/values-nb/NOR_play_strings.xml","res/norway/MultiMediaPlayer/values-nb/NOR_play_strings.xml");
+            compareXMLA2XMLB("res/norway/MultiMediaPlayer/values-temp/strings.xml","res/norway/MultiMediaPlayer/values-nb/NOR_strings.xml","res/norway/MultiMediaPlayer/values-nb/NOR_strings.xml");
+
         }else{
 
-            //TransArray mmp=new TransArray("res/norway/LiveTVSetupWizard.xlsx","res/norway/LiveTVSetupWizard/values-nb/NOR_mmp_arrays.xml","mmp_arrays",1,5);
-            TransArray com=new TransArray("res/norway/LiveTVSetupWizard.xlsx","res/norway/LiveTVSetupWizard/values-nb/NOR_com_arrays.xml","com_arrays",1,5);
-            TransArray menu=new TransArray("res/norway/LiveTVSetupWizard.xlsx","res/norway/LiveTVSetupWizard/values-nb/NOR_menu_arrays.xml","menu_arrays",1,5);
-            TransArray nav=new TransArray("res/norway/LiveTVSetupWizard.xlsx","res/norway/LiveTVSetupWizard/values-nb/NOR_nav_arrays.xml","nav_arrays",1,5);
-            //TransArray thr=new TransArray("res/norway/LiveTVSetupWizard.xlsx","res/norway/LiveTVSetupWizard/values-nb/NOR_thr_menu_arrays.xml","thr_menu_arrays",1,5);
+            TransArray mmp=new TransArray("res/norway/MultiMediaPlayer.xlsx","res/norway/MultiMediaPlayer/values-nb/NOR_mmp_arrays.xml","mmp_arrays",1,5);
+            TransArray com=new TransArray("res/norway/MultiMediaPlayer.xlsx","res/norway/MultiMediaPlayer/values-nb/NOR_com_arrays.xml","com_arrays",1,5);
+            TransArray menu=new TransArray("res/norway/MultiMediaPlayer.xlsx","res/norway/MultiMediaPlayer/values-nb/NOR_menu_arrays.xml","menu_arrays",1,5);
+            TransArray nav=new TransArray("res/norway/MultiMediaPlayer.xlsx","res/norway/MultiMediaPlayer/values-nb/NOR_nav_arrays.xml","nav_arrays",1,5);
+            TransArray thr=new TransArray("res/norway/MultiMediaPlayer.xlsx","res/norway/MultiMediaPlayer/values-nb/NOR_thr_menu_arrays.xml","thr_menu_arrays",1,5);
+            //TransArray array=new TransArray("res/norway/MultiMediaPlayer.xlsx","res/norway/MultiMediaPlayer/values-nb/NOR_thr_menu_arrays.xml","thr_menu_arrays",1,5);
 
-
-            //mmp.printTotal();
+            //array.printTotal();
+            mmp.printTotal();
             com.printTotal();
             menu.printTotal();
             nav.printTotal();
-            //thr.printTotal();
-
+            thr.printTotal();
 
         }
     }
     public static void main(String[] args) {
 
-        stringOrArray(0);//0 for strings.xml & 1 for arrays.xml
+        stringOrArray(1);//0 for strings.xml & 1 for arrays.xml
 
 //        String name = findXMLFile("menu_strings.xml", "thr_menu_strings.xml");
 //        System.out.println("name = " + name);
