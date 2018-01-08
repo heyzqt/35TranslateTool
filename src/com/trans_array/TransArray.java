@@ -23,7 +23,7 @@ public class TransArray
 {
     private HashMap<String,String> t_XmlMap;
     private HashMap<String,ArrayList<String>> s_XmlMap;
-
+    private int count=0;
     private File t_xmlDoc =null;
     private File s_xmlDoc =null;
     private String t_xmlPath ="res/middle.xml";
@@ -69,9 +69,12 @@ public class TransArray
                     if (t_XmlMap.get(eng_name).equals(itemValue)&& !t_XmlMap.get(eng_name).equals("xx"))
                     {
                         itemList.set(i,t_XmlMap.get(eng_name));
+                        count++;
+                        System.out.println("translate "+eng_name+" to ["+t_XmlMap.get(eng_name)+"]");
                     }
                 }
             }
+            System.out.println("Total change number is ["+count+"]");
             s_XmlMap.put(key,itemList);
         }
     }
@@ -140,7 +143,14 @@ public class TransArray
         for (int i=1;i<rownum;i++){
             curRow=st.getRow(i);
             String eng_name=curRow.getCell(ENG_COL_NUM).getStringCellValue();
-            String trans_value=curRow.getCell(ITEM_COL_NUM).getStringCellValue();
+            String trans_value_type=curRow.getCell(ITEM_COL_NUM).getCellFormula();
+            String trans_value="";
+            if (trans_value_type.equals("NUMERIC")){
+                double a=curRow.getCell(ITEM_COL_NUM).getNumericCellValue();
+                trans_value=Double.toString(a);
+            }else if(trans_value_type.equals("STRING")){
+                trans_value=curRow.getCell(ITEM_COL_NUM).getStringCellValue();
+            }
             System.out.println(eng_name+"  "+trans_value);
             t_XmlMap.put(eng_name,trans_value);
         }
@@ -203,5 +213,7 @@ public class TransArray
         xmlWriter.flush();
         xmlWriter.close();
     }
-
+    public void printTotal(){
+        System.out.println(this.SHEET_NAME+" has translate "+count);
+    }
 }
