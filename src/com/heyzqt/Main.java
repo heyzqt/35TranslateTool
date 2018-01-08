@@ -54,7 +54,7 @@ public class Main {
             new TransArray(
                     "res/out.xlsx",
                     "res/NOR_thr_menu_arrays.xml",
-                    "Sheet1",
+                    "Sheet1",//name
                     0,
                     2
             );
