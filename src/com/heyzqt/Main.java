@@ -51,15 +51,13 @@ public class Main {
     private static void stringOrArray(int stringOrArray){
         if (stringOrArray==0){
             new CompareTranslateFrame();
-            compareXMLA2XMLB("res/norway/LiveTV/values-temp/menu_strings.xml","res/norway/LiveTV/values-nb/NOR_menu_strings.xml","res/norway/LiveTV/values-nb/NOR_menu_strings.xml");
-            compareXMLA2XMLB("res/norway/LiveTV/values-temp/nav_strings.xml","res/norway/LiveTV/values-nb/NOR_nav_strings.xml","res/norway/LiveTV/values-nb/NOR_nav_strings.xml");
-            compareXMLA2XMLB("res/norway/LiveTV/values-temp/thr_strings.xml","res/norway/LiveTV/values-nb/NOR_thr_menu_strings.xml","res/norway/LiveTV/values-nb/NOR_thr_menu_strings.xml");
-            compareXMLA2XMLB("res/norway/LiveTV/values-temp/timeshift_strings.xml","res/norway/LiveTV/values-nb/NOR_timeshift_strings.xml","res/norway/LiveTV/values-nb/NOR_timeshift_strings.xml");
-            compareXMLA2XMLB("res/norway/LiveTV/values-temp/mmp_strings.xml","res/norway/LiveTV/values-nb/NOR_mmp_strings.xml","res/norway/LiveTV/values-nb/NOR_mmp_strings.xml");
-            //compareXMLA2XMLB("res/norway/LiveTV/values-temp/play_strings.xml","res/norway/LiveTV/values-nb/NOR_play_strings.xml","res/norway/LiveTV/values-nb/NOR_play_strings.xml");
-            compareXMLA2XMLB("res/norway/LiveTV/values-temp/strings.xml","res/norway/LiveTV/values-nb/NOR_strings.xml","res/norway/LiveTV/values-nb/NOR_strings.xml");
-
-
+            compareXMLA2XMLB("res/norway/LiveTVSetupWizard/values-temp/menu_strings.xml","res/norway/LiveTVSetupWizard/values-nb/NOR_menu_strings.xml","res/norway/LiveTVSetupWizard/values-nb/NOR_menu_strings.xml");
+            //compareXMLA2XMLB("res/norway/LiveTVSetupWizard/values-temp/nav_strings.xml","res/norway/LiveTVSetupWizard/values-nb/NOR_nav_strings.xml","res/norway/LiveTVSetupWizard/values-nb/NOR_nav_strings.xml");
+            //compareXMLA2XMLB("res/norway/LiveTVSetupWizard/values-temp/thr_strings.xml","res/norway/LiveTVSetupWizard/values-nb/NOR_thr_menu_strings.xml","res/norway/LiveTVSetupWizard/values-nb/NOR_thr_menu_strings.xml");
+            //compareXMLA2XMLB("res/norway/LiveTVSetupWizard/values-temp/timeshift_strings.xml","res/norway/LiveTVSetupWizard/values-nb/NOR_timeshift_strings.xml","res/norway/LiveTVSetupWizard/values-nb/NOR_timeshift_strings.xml");
+            //compareXMLA2XMLB("res/norway/LiveTVSetupWizard/values-temp/mmp_strings.xml","res/norway/LiveTVSetupWizard/values-nb/NOR_mmp_strings.xml","res/norway/LiveTVSetupWizard/values-nb/NOR_mmp_strings.xml");
+            //compareXMLA2XMLB("res/norway/LiveTVSetupWizard/values-temp/play_strings.xml","res/norway/LiveTVSetupWizard/values-nb/NOR_play_strings.xml","res/norway/LiveTVSetupWizard/values-nb/NOR_play_strings.xml");
+            compareXMLA2XMLB("res/norway/LiveTVSetupWizard/values-temp/strings.xml","res/norway/LiveTVSetupWizard/values-nb/NOR_strings.xml","res/norway/LiveTVSetupWizard/values-nb/NOR_strings.xml");
         }else{
 
             //TransArray mmp=new TransArray("res/norway/LiveTVSetupWizard.xlsx","res/norway/LiveTVSetupWizard/values-nb/NOR_mmp_arrays.xml","mmp_arrays",1,5);
