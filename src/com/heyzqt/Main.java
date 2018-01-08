@@ -8,6 +8,8 @@ import org.dom4j.io.XMLWriter;
 import java.io.*;
 import java.util.Iterator;
 
+import static org.apache.poi.xwpf.usermodel.XWPFRun.FontCharRange.cs;
+
 public class Main {
 
     /**
@@ -49,15 +51,20 @@ public class Main {
     private static void stringOrArray(int stringOrArray){
         if (stringOrArray==0){
             new CompareTranslateFrame();
-            compareXMLA2XMLB("src/standard_strings_vi_rVN.xml", "src/strings.xml", "src/strings.xml");
+            compareXMLA2XMLB("res/norway/LiveTV/values-temp/menu_strings.xml","res/norway/LiveTV/values-nb/NOR_menu_strings.xml","res/norway/LiveTV/values-nb/NOR_menu_strings.xml");
+            compareXMLA2XMLB("res/norway/LiveTV/values-temp/nav_strings.xml","res/norway/LiveTV/values-nb/NOR_nav_strings.xml","res/norway/LiveTV/values-nb/NOR_nav_strings.xml");
+            compareXMLA2XMLB("res/norway/LiveTV/values-temp/thr_strings.xml","res/norway/LiveTV/values-nb/NOR_thr_menu_strings.xml","res/norway/LiveTV/values-nb/NOR_thr_menu_strings.xml");
+            compareXMLA2XMLB("res/norway/LiveTV/values-temp/timeshift_strings.xml","res/norway/LiveTV/values-nb/NOR_timeshift_strings.xml","res/norway/LiveTV/values-nb/NOR_timeshift_strings.xml");
+            compareXMLA2XMLB("res/norway/LiveTV/values-temp/strings.xml","res/norway/LiveTV/values-nb/NOR_strings.xml","res/norway/LiveTV/values-nb/NOR_strings.xml");
+            compareXMLA2XMLB("res/norway/LiveTV/values-temp/mmp_strings.xml","res/norway/LiveTV/values-nb/NOR_mmp_strings.xml","res/norway/LiveTV/values-nb/NOR_mmp_strings.xml");
+
         }else{
-            new TransArray(
-                    "res/out.xlsx",
-                    "res/NOR_thr_menu_arrays.xml",
-                    "Sheet1",//name
-                    0,
-                    2
-            );
+
+            //new TransArray("res/norway/LiveTV.xlsx","res/norway/LiveTV/values-nb/NOR_mmp_arrays.xml","mmp_arrays",0,5);
+            //new TransArray("res/norway/LiveTV.xlsx","res/norway/LiveTV/values-nb/NOR_com_arrays.xml","com_arrays",0,5);
+            new TransArray("res/jieke/LiveTVSettings.xlsx","res/jieke/LiveTVSettings/values-cs/menu_arrays.xml","menu_arrays",1,5);
+            // TransArray("res/norway/LiveTV.xlsx","res/norway/LiveTV/values-nb/NOR_nav_arrays.xml","nav_arrays",0,5);
+            //new TransArray("res/norway/LiveTV.xlsx","res/norway/LiveTV/values-nb/NOR_thr_menu_arrays.xml","thr_menu_arrays",1,5);
         }
     }
     public static void main(String[] args) {

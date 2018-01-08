@@ -21,7 +21,7 @@ import java.util.Set;
  */
 public class TransArray
 {
-    private HashMap<String,ArrayList<String>> t_XmlMap;
+    private HashMap<String,String> t_XmlMap;
     private HashMap<String,ArrayList<String>> s_XmlMap;
 
     private File t_xmlDoc =null;
@@ -30,23 +30,23 @@ public class TransArray
     private String s_xmlPath;
     private String xlsxPath;
     private String SHEET_NAME="";
-    private int NAME_COL_NUM=0;
-    private int ITEM_COL_NUM=2;
+    private int ENG_COL_NUM=1;
+    private int ITEM_COL_NUM=5;
     private static final String ROOT_ELEMENTS="resources";
     private static final String SUB_ELEMENTS="string-array";
     private static final String ITEM_ELEMENTS="item";
-    public TransArray(String xlsxPath, String xmlPath,String sheetName,int nameColNum,int itemColNum){
+    public TransArray(String xlsxPath, String xmlPath,String sheetName,int engColNum,int itemColNum){
         this.s_xmlPath =xmlPath;
         this.xlsxPath=xlsxPath;
         this.SHEET_NAME=sheetName;
-        this.NAME_COL_NUM=nameColNum;
+        this.ENG_COL_NUM=engColNum;
         this.ITEM_COL_NUM=itemColNum;
-        t_XmlMap =new HashMap<String,ArrayList<String>>();
+        t_XmlMap =new HashMap<String,String>();
         s_XmlMap =new HashMap<String,ArrayList<String>>();
         t_xmlDoc =new File("res/middle.xml");
         s_xmlDoc =new File(s_xmlPath);
         if (loadexcel()==0){
-            generateXMLDoc(t_XmlMap,t_xmlPath);
+            //generateT_XMLDoc(t_XmlMap,t_xmlPath);
         }else{
             System.out.println("Stop With Error!");
         }
@@ -60,13 +60,19 @@ public class TransArray
         Set<String> s_keySet=s_XmlMap.keySet();
         for (String key:s_keySet){
             System.out.println("key is "+key);
-            ArrayList<String> itemList=t_XmlMap.get(key);
-
-            for (int i=0;i<itemList.size();i++){
-                if (!itemList.get(i).equals("xx")){
-                    s_XmlMap.get(key).set(i,itemList.get(i));
+            ArrayList<String> itemList=s_XmlMap.get(key);
+            for (int i=0;i<itemList.size();i++)
+            {
+                String itemValue=itemList.get(i);
+                for (String eng_name : t_XmlMap.keySet())
+                {
+                    if (t_XmlMap.get(eng_name).equals(itemValue)&& !t_XmlMap.get(eng_name).equals("xx"))
+                    {
+                        itemList.set(i,t_XmlMap.get(eng_name));
+                    }
                 }
             }
+            s_XmlMap.put(key,itemList);
         }
     }
 
@@ -91,7 +97,6 @@ public class TransArray
             e.printStackTrace();
         }
     }
-
 
     private void generateXMLDoc(HashMap<String,ArrayList<String>> map,String filePath)
     {
@@ -134,10 +139,10 @@ public class TransArray
         System.out.println("rownum is "+rownum);
         for (int i=1;i<rownum;i++){
             curRow=st.getRow(i);
-            String array_name=curRow.getCell(NAME_COL_NUM).getStringCellValue();
-            String item_value=curRow.getCell(ITEM_COL_NUM).getStringCellValue();
-            System.out.println(array_name+"  "+item_value);
-            t_XmlMap =generateXmlMap(t_XmlMap,array_name,item_value);
+            String eng_name=curRow.getCell(ENG_COL_NUM).getStringCellValue();
+            String trans_value=curRow.getCell(ITEM_COL_NUM).getStringCellValue();
+            System.out.println(eng_name+"  "+trans_value);
+            t_XmlMap.put(eng_name,trans_value);
         }
         System.out.println("xmlmap size is "+ t_XmlMap.size());
         return 0;
