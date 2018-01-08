@@ -1,5 +1,6 @@
 package com.heyzqt;
 
+import com.trans_array.TransArray;
 import org.dom4j.*;
 import org.dom4j.io.SAXReader;
 import org.dom4j.io.XMLWriter;
@@ -45,12 +46,23 @@ public class Main {
             "values-no", "values-pl", "values-pt", "values-ro", "values-ru", "values-sk", "values-sl",
             "values-sq-rAL", "values-sr", "values-sv", "values-sw-rTZ", "values-ta-rIN", "values-th", "values-tr",
             "values-uk-rUA", "values-vi-rVN"};
-
+    private static void stringOrArray(int stringOrArray){
+        if (stringOrArray==0){
+            new CompareTranslateFrame();
+            compareXMLA2XMLB("src/standard_strings_vi_rVN.xml", "src/strings.xml", "src/strings.xml");
+        }else{
+            new TransArray(
+                    "res/out.xlsx",
+                    "res/NOR_thr_menu_arrays.xml",
+                    "Sheet1",
+                    0,
+                    2
+            );
+        }
+    }
     public static void main(String[] args) {
 
-        new CompareTranslateFrame();
-
-        compareXMLA2XMLB("src/standard_strings_vi_rVN.xml", "src/strings.xml", "src/strings.xml");
+        stringOrArray(1);//0 for strings.xml & 1 for arrays.xml
 
 //        String name = findXMLFile("menu_strings.xml", "thr_menu_strings.xml");
 //        System.out.println("name = " + name);
