@@ -62,9 +62,11 @@ public class TransArray
             System.out.println("key is "+key);
             ArrayList<String> itemList=t_XmlMap.get(key);
 
-            for (int i=0;i<itemList.size();i++){
-                if (!itemList.get(i).equals("xx")){
-                    s_XmlMap.get(key).set(i,itemList.get(i));
+            if(null != itemList && 0 != itemList.size()){
+                for (int i=0;i<itemList.size();i++){
+                    if (!itemList.get(i).equals("xx")){
+                        s_XmlMap.get(key).set(i,itemList.get(i));
+                    }
                 }
             }
         }
