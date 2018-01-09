@@ -65,7 +65,7 @@ public class TransArray
                 String itemValue=itemList.get(i);
                 for (String eng_name : t_XmlMap.keySet())
                 {
-                    if (t_XmlMap.get(eng_name).equals(itemValue)&& !t_XmlMap.get(eng_name).equals("xx"))
+                    if (eng_name.equals(itemValue)&& !t_XmlMap.get(eng_name).equals("xx"))
                     {
                         itemList.set(i,t_XmlMap.get(eng_name));
                         count++;
@@ -141,8 +141,13 @@ public class TransArray
         for (int i=1;i<rownum;i++){
             curRow=st.getRow(i);
             String eng_name=curRow.getCell(ENG_COL_NUM).getStringCellValue();
-            String trans_value_type=curRow.getCell(ITEM_COL_NUM).getCellFormula();
+            int  trans_value_type=curRow.getCell(ITEM_COL_NUM).getCellType();
             String trans_value="";
+            if(trans_value_type==0){
+                trans_value=Double.toString(curRow.getCell(ITEM_COL_NUM).getNumericCellValue());
+            }else{
+                trans_value=curRow.getCell(ITEM_COL_NUM).getStringCellValue();
+            }
             trans_value=curRow.getCell(ITEM_COL_NUM).getStringCellValue();
             t_XmlMap.put(eng_name,trans_value);
         }

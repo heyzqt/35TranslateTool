@@ -53,30 +53,18 @@ public class Main {
     private static void stringOrArray(int stringOrArray){
         if (stringOrArray==0){
             new CompareTranslateFrame();
-            compareXMLA2XMLB("res/norway/MultiMediaPlayer/values-temp/menu_strings.xml","res/norway/MultiMediaPlayer/values-nb/NOR_menu_strings.xml","res/norway/MultiMediaPlayer/values-nb/NOR_menu_strings.xml");
-            compareXMLA2XMLB("res/norway/MultiMediaPlayer/values-temp/nav_strings.xml","res/norway/MultiMediaPlayer/values-nb/NOR_nav_strings.xml","res/norway/MultiMediaPlayer/values-nb/NOR_nav_strings.xml");
-            compareXMLA2XMLB("res/norway/MultiMediaPlayer/values-temp/thr_strings.xml","res/norway/MultiMediaPlayer/values-nb/NOR_thr_menu_strings.xml","res/norway/MultiMediaPlayer/values-nb/NOR_thr_menu_strings.xml");
-            compareXMLA2XMLB("res/norway/MultiMediaPlayer/values-temp/timeshift_strings.xml","res/norway/MultiMediaPlayer/values-nb/NOR_timeshift_strings.xml","res/norway/MultiMediaPlayer/values-nb/NOR_timeshift_strings.xml");
-            compareXMLA2XMLB("res/norway/MultiMediaPlayer/values-temp/mmp_strings.xml","res/norway/MultiMediaPlayer/values-nb/NOR_mmp_strings.xml","res/norway/MultiMediaPlayer/values-nb/NOR_mmp_strings.xml");
-            //compareXMLA2XMLB("res/norway/MultiMediaPlayer/values-temp/play_strings.xml","res/norway/MultiMediaPlayer/values-nb/NOR_play_strings.xml","res/norway/MultiMediaPlayer/values-nb/NOR_play_strings.xml");
-            compareXMLA2XMLB("res/norway/MultiMediaPlayer/values-temp/strings.xml","res/norway/MultiMediaPlayer/values-nb/NOR_strings.xml","res/norway/MultiMediaPlayer/values-nb/NOR_strings.xml");
+            compareXMLA2XMLB("res/aerbaniya/MultiMediaPlayer/values-temp/menu_strings.xml","res/aerbaniya/MultiMediaPlayer/values-sq-rAL/menu_strings.xml","res/aerbaniya/MultiMediaPlayer/values-sq-rAL/menu_strings.xml");
+            compareXMLA2XMLB("res/aerbaniya/MultiMediaPlayer/values-temp/nav_strings.xml","res/aerbaniya/MultiMediaPlayer/values-sq-rAL/nav_strings.xml","res/aerbaniya/MultiMediaPlayer/values-sq-rAL/nav_strings.xml");
+            compareXMLA2XMLB("res/aerbaniya/MultiMediaPlayer/values-temp/thr_strings.xml","res/aerbaniya/MultiMediaPlayer/values-sq-rAL/thr_menu_strings.xml","res/aerbaniya/MultiMediaPlayer/values-sq-rAL/thr_menu_strings.xml");
+            compareXMLA2XMLB("res/aerbaniya/MultiMediaPlayer/values-temp/timeshift_strings.xml","res/aerbaniya/MultiMediaPlayer/values-sq-rAL/timeshift_strings.xml","res/aerbaniya/MultiMediaPlayer/values-sq-rAL/timeshift_strings.xml");
+            compareXMLA2XMLB("res/aerbaniya/MultiMediaPlayer/values-temp/mmp_strings.xml","res/aerbaniya/MultiMediaPlayer/values-sq-rAL/mmp_strings.xml","res/aerbaniya/MultiMediaPlayer/values-sq-rAL/mmp_strings.xml");
+            compareXMLA2XMLB("res/aerbaniya/MultiMediaPlayer/values-temp/play_strings.xml","res/aerbaniya/MultiMediaPlayer/values-sq-rAL/play_strings.xml","res/aerbaniya/MultiMediaPlayer/values-sq-rAL/play_strings.xml");
+            compareXMLA2XMLB("res/aerbaniya/MultiMediaPlayer/values-temp/strings.xml","res/aerbaniya/MultiMediaPlayer/values-sq-rAL/strings.xml","res/aerbaniya/MultiMediaPlayer/values-sq-rAL/strings.xml");
 
         }else{
 
-            TransArray mmp=new TransArray("res/norway/MultiMediaPlayer.xlsx","res/norway/MultiMediaPlayer/values-nb/NOR_mmp_arrays.xml","mmp_arrays",1,5);
-            TransArray com=new TransArray("res/norway/MultiMediaPlayer.xlsx","res/norway/MultiMediaPlayer/values-nb/NOR_com_arrays.xml","com_arrays",1,5);
-            TransArray menu=new TransArray("res/norway/MultiMediaPlayer.xlsx","res/norway/MultiMediaPlayer/values-nb/NOR_menu_arrays.xml","menu_arrays",1,5);
-            TransArray nav=new TransArray("res/norway/MultiMediaPlayer.xlsx","res/norway/MultiMediaPlayer/values-nb/NOR_nav_arrays.xml","nav_arrays",1,5);
-            TransArray thr=new TransArray("res/norway/MultiMediaPlayer.xlsx","res/norway/MultiMediaPlayer/values-nb/NOR_thr_menu_arrays.xml","thr_menu_arrays",1,5);
-            //TransArray array=new TransArray("res/norway/MultiMediaPlayer.xlsx","res/norway/MultiMediaPlayer/values-nb/NOR_thr_menu_arrays.xml","thr_menu_arrays",1,5);
-
-            //array.printTotal();
-            mmp.printTotal();
-            com.printTotal();
+            TransArray menu=new TransArray("res/aerbaniya/LiveTV.xlsx","res/aerbaniya/LiveTV/values-sq-rAL/menu_arrays.xml","menu_arrays",1,5);
             menu.printTotal();
-            nav.printTotal();
-            thr.printTotal();
-
         }
     }
     public static void main(String[] args) {
